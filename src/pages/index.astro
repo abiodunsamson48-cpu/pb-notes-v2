@@ -1,21 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await getCollection('blog');
 ---
 
-<Layout title="PB Notes">
-   <h1 class="mb-10 text-5xl font-bold">Welcome to PB Notes</h1>
-    
-    <div class="mb-10 text-xl italic border-l-4 border-gray-500 pl-4">
-        Writing Christ, Teaching Purpose.
-    </div>
-
-    <p class="mb-10 text-lg text-white/90">
-    A space dedicated to exploring spiritual depth, finding your calling, 
-    and living a life rooted in faith. From navigating relationships to spiritual challenges, we explore what it means 
-    to live fully for Christ today.
-</p>
-
-    <p>
-        <a href="/blog" class="btn btn-lg sm:min-w-64 bg-black text-white px-6 py-3 rounded-lg inline-block">Explore My Notes</a>
-    </p>
+<Layout title="PB Notes | All Posts">
+	<main class="max-w-5xl mx-auto px-4 py-12 text-white">
+		<h1 class="text-4xl font-bold mb-8">Spiritual Notes</h1>
+		<div class="grid gap-8">
+			{posts.map((post) => (
+				<a href={`/blog/${post.id}/`} class="block p-6 border border-white/10 rounded-xl hover:bg-white/5 transition">
+					<h2 class="text-2xl font-bold mb-2">{post.data.title}</h2>
+					<p class="text-gray-400 mb-4">{post.data.description}</p>
+					<span class="text-sm text-gray-500">{post.data.pubDate.toLocaleDateString()}</span>
+				</a>
+			))}
+		</div>
+	</main>
 </Layout>
