@@ -1,9 +1,12 @@
 ---
-
+const year = new Date().getFullYear();
 ---
-
-<footer class="pt-16 pb-12 sm:pt-24 sm:pb-16">
-    <p class="text-sm">
-        <a href="https://docs.netlify.com/frameworks/astro/" class="decoration-dashed text-primary underline-offset-8"> Astro on Netlify </a>
-    </p>
+<footer class="py-10 px-4 mt-20 border-t border-white/10 text-center text-gray-400 text-sm">
+    <div class="max-w-5xl mx-auto">
+        <p>&copy; {year} PB Notes. Writing Christ, Teaching Purpose.</p>
+        <div class="mt-4 flex justify-center gap-6">
+            <a href="/" class="hover:text-white transition">Home</a>
+            <a href="/blog" class="hover:text-white transition">Blog</a>
+        </div>
+    </div>
 </footer>
