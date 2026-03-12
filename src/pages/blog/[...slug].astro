@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title}>
+  <main class="max-w-3xl mx-auto px-4 py-12 text-white">
+    {post.data.heroImage && <img src={post.data.heroImage} class="w-full rounded-2xl mb-8" alt="" />}
+    <h1 class="text-4xl font-bold mb-4">{post.data.title}</h1>
+    <div class="prose prose-invert prose-emerald lg:prose-xl">
+      <Content />
+    </div>
+    <div class="mt-12 pt-8 border-t border-white/10">
+      <a href="/blog" class="text-gray-400 hover:text-white transition">← Back to all notes</a>
+    </div>
+  </main>
+</Layout>
